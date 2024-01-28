@@ -3,7 +3,7 @@ import { useGetReservations } from '../../hooks/api/useGetReservations';
 import List from '../List';
 import type { IUserReservationDTO } from '../../interfaces/server/user';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button } from '../ui/button';
+import Button from '../ui/button';
 
 const Reservations: FC = () => {
   const { reservations } = useGetReservations();

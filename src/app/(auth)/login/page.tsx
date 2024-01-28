@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { useLogin } from '@/common/hooks/api/useLogin';
-import { Button } from '@/common/components/ui/button';
+import Button from '@/common/components/ui/button';
 import InputItem from '@/common/components/ui/inputItem';
 import Input from '@/common/components/ui/input';
 const formSchema = z
@@ -47,16 +47,7 @@ const LoginPage: FC = () => {
           />
         </InputItem>
 
-        {mutation.isPending ? (
-          <Button variant={'primary'} disabled>
-            <Loader2 />
-            Pracujeme na tom
-          </Button>
-        ) : (
-          <Button variant={'primary'} type="submit">
-            Přihlásit se
-          </Button>
-        )}
+        <Button loading={mutation.isPending}>Přihlásit se</Button>
       </form>
     </div>
   );

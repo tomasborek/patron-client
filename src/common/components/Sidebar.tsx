@@ -7,7 +7,7 @@ import {
   PopoverTrigger,
 } from '@/common/components/ui/popover';
 import { useGetMe } from '../hooks/api/useGetMe';
-import { Button } from './ui/button';
+import Button from '@/common/components/ui/button';
 import { useInstitution } from '../contexts/InstitutionContext';
 import SelectInstitutionDialog from '@/modules/dashboard/components/SelectInstitutionDialog';
 import { useAuth } from '../contexts/AuthContext';
@@ -82,9 +82,9 @@ const Sidebar: FC = () => {
             </div>
             <Popover>
               <PopoverTrigger>
-                <Button variant={'ghost'} className="hover:bg-gray-200">
+                <div className="rounded-md p-4 hover:bg-gray-200">
                   <FontAwesomeIcon icon="chevron-down" />
-                </Button>
+                </div>
               </PopoverTrigger>
               <PopoverContent className="rounded-xl bg-white shadow-xl">
                 <ul className="font-sm flex flex-col gap-2">
