@@ -10,9 +10,13 @@ import { useGetMe } from '../hooks/api/useGetMe';
 import { Button } from './ui/button';
 import { useInstitution } from '../contexts/InstitutionContext';
 import SelectInstitutionDialog from '@/modules/dashboard/components/SelectInstitutionDialog';
+import { useAuth } from '../contexts/AuthContext';
+import { useRouter } from 'next/navigation';
 
 const Sidebar: FC = () => {
   const { me } = useGetMe();
+  const { logout } = useAuth();
+  const router = useRouter();
   const { institution } = useInstitution();
   const [institutionDialogOpen, setInstitutionDialogOpen] =
     useState<boolean>(false);
@@ -88,7 +92,13 @@ const Sidebar: FC = () => {
                     <FontAwesomeIcon icon={'cogs'} />
                     <p>Nastavení</p>
                   </li>
-                  <li className="flex w-full cursor-pointer items-center gap-4 rounded-xl p-2 text-red-800 transition-all duration-500 hover:bg-gray-100">
+                  <li
+                    onClick={() => {
+                      logout();
+                      router.push('/login');
+                    }}
+                    className="flex w-full cursor-pointer items-center gap-4 rounded-xl p-2 text-red-800 transition-all duration-500 hover:bg-gray-100"
+                  >
                     <FontAwesomeIcon icon={'sign-out'} />
                     <p>Odhlásit se</p>
                   </li>

@@ -31,3 +31,25 @@ export interface IUserReservationDTO {
     };
   };
 }
+
+export interface ILoginDTO {
+  email: string;
+  password: string;
+}
+
+export interface ILoginResponseDTO {
+  token: string;
+}
+
+export interface IActivateDTO {
+  email: string;
+  password: string;
+}
+
+export interface IActivateResponseDTO {
+  tokenId: string;
+}
+
+export interface IVerifyDTO{
+  code: number;
+}

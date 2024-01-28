@@ -4,10 +4,11 @@ import { FC } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
-import { useLogin } from '@/common/hooks/api/useLogin';
+import Input from '@/common/components/ui/input';
 import { Button } from '@/common/components/ui/button';
 import InputItem from '@/common/components/ui/inputItem';
-import Input from '@/common/components/ui/input';
+import { useActivate } from '@/common/hooks/api/useActivate';
+import ErrorPanel from '@/common/components/ui/errorPanel';
 const formSchema = z
   .object({
     email: z.string().email({ message: 'Zadejte validní email' }),
@@ -15,11 +16,20 @@ const formSchema = z
       .string()
       .min(8, { message: 'Heslo musí být delší než 8 znaků' })
       .max(255, { message: 'Heslo musí být kratší než 255 znaků' }),
+    'password-again': z
+      .string()
+      .min(8, { message: 'Hesla se neshodují' })
+      .max(255, { message: 'Hesla se neshodují' }),
   })
-  .strict();
+  .strict()
+  .refine(data => data.password === data['password-again'], {
+    message: 'Hesla se neshodují',
+    path: ['password-again'],
+  });
 
 const LoginPage: FC = () => {
-  const { login, mutation } = useLogin();
+  const { activate, mutation } = useActivate();
+
   const {
     handleSubmit,
     register,
@@ -29,24 +39,40 @@ const LoginPage: FC = () => {
   });
   return (
     <div className="flex w-full flex-col gap-4">
-      <h2 className="font-bold">Přihlášení</h2>
+      <h2 className="text-center text-xl font-bold text-gray-600">
+        Aktivace účtu
+      </h2>
+      <p className="text-center text-sm text-gray-400">
+        Vítejte v Patronu! Byli jste pozváni do instituce a zbývá vám již si
+        pouze aktivovat účet a ověřit si e-mail a poté můžete využívat Patron
+        naplno!
+      </p>
       <form
         className="flex w-full flex-col items-center gap-4"
         onSubmit={handleSubmit(data => {
-          login(data);
+          activate({ email: data.email, password: data.password });
         })}
       >
         <InputItem label="E-mail" error={errors.email?.message}>
-          <Input placeholder="E-mail" {...register('email')} />
+          <Input placeholder="Jan Nový" {...register('email')} />
         </InputItem>
         <InputItem label="Heslo" error={errors.password?.message}>
           <Input
-            placeholder="Heslo"
+            placeholder="Bezpečné heslo"
             type="password"
             {...register('password')}
           />
         </InputItem>
-
+        <InputItem
+          label="Heslo znovu"
+          error={errors['password-again']?.message}
+        >
+          <Input
+            placeholder="Heslo pro kontrolu"
+            type="password"
+            {...register('password-again')}
+          />
+        </InputItem>
         {mutation.isPending ? (
           <Button variant={'primary'} disabled>
             <Loader2 />

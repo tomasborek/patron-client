@@ -1,17 +1,19 @@
-import { UserService } from '@/lib/services/user.service'
-import { useQuery } from 'react-query'
-import { useAuth } from '@/common/contexts/AuthContext'
+import { UserService } from '@/lib/services/user.service';
+import { useQuery } from '@tanstack/react-query';
+import { useAuth } from '@/common/contexts/AuthContext';
 
 export const useGetMe = () => {
-  const { currentUser } = useAuth()
-  const userService = new UserService(currentUser?.token)
+  const { token } = useAuth();
+  const userService = new UserService(token);
 
-  const query = useQuery('me', () => userService.getMe(), {
-    enabled: !!currentUser?.token,
-  })
+  const query = useQuery({
+    queryKey: ['me'],
+    queryFn: () => userService.getMe(),
+    enabled: !!token,
+  });
 
   return {
     me: query.data?.data.data?.me,
     query,
-  }
-}
+  };
+};

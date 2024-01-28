@@ -1,8 +1,8 @@
-"use client";
-import AuthProvider from "@/common/contexts/AuthContext";
-import "@/styles/globals.css";
-import "@fortawesome/fontawesome-svg-core/styles.css";
-import { Toaster } from "react-hot-toast";
+'use client';
+import AuthProvider from '@/common/contexts/AuthContext';
+import '@/styles/globals.css';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { Toaster } from 'react-hot-toast';
 import {
   faUser,
   faChevronDown,
@@ -61,9 +61,9 @@ import {
   faLock,
   faPhone,
   faQuestion,
-} from "@fortawesome/free-solid-svg-icons";
+} from '@fortawesome/free-solid-svg-icons';
 
-const { library } = require("@fortawesome/fontawesome-svg-core");
+const { library } = require('@fortawesome/fontawesome-svg-core');
 
 library.add(
   faUser,
@@ -129,8 +129,8 @@ library.add(
   faInfoCircle,
 );
 
-import { QueryClientProvider, QueryClient } from "react-query";
-import InstitutionProvider from "@/common/contexts/InstitutionContext";
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import InstitutionProvider from '@/common/contexts/InstitutionContext';
 
 const queryClient = new QueryClient({
   defaultOptions: {
