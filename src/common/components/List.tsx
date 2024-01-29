@@ -1,22 +1,22 @@
-import { FC } from "react";
+import { FC } from 'react';
 interface Props {
   items: any[] | undefined;
   render: (item: any) => React.ReactNode;
   noContentMessage?: string;
-  className?: React.HTMLAttributes<HTMLDivElement>["className"];
+  className?: React.HTMLAttributes<HTMLDivElement>['className'];
 }
-import { Loader2 } from "lucide-react";
+import { Loader2 } from 'lucide-react';
 const List: FC<Props> = ({ items, render, noContentMessage, className }) => {
   if (items === undefined) return <Loader2 />;
   if (items.length === 0)
     return (
-      <div className={className}>
+      <div>
         <p className="font-sm text-gray-600">
-          {noContentMessage || "Nic jsme nenašli."}
+          {noContentMessage || 'Nic jsme nenašli.'}
         </p>
       </div>
     );
-  return render(items);
+  return <div className={className}>{render(items)}</div>;
 };
 
 export default List;

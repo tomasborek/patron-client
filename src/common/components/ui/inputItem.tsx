@@ -1,15 +1,15 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { type FC } from 'react';
 
-interface IProps {
+interface IProps extends React.HTMLAttributes<HTMLDivElement> {
   label: string;
   children: React.ReactNode | React.ReactNode[];
   error?: string;
 }
 
-const InputItem: FC<IProps> = ({ label, children, error }) => {
+const InputItem: FC<IProps> = ({ label, children, error, ...props }) => {
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className="flex w-full flex-col gap-2" {...props}>
       <p className="text-sm text-gray-600">{label}</p>
       {children}
       {error && (

@@ -10,8 +10,8 @@ export class ApiService {
     this.token = token;
     this.prefix = prefix;
   }
-  public url(path: string) {
-    return `${API_URL}${this.prefix ?? ''}${path}`;
+  public url(path?: string) {
+    return `${API_URL}${this.prefix ?? ''}${path ?? ''}`;
   }
 
   public getBearer(token: string | undefined) {

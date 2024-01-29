@@ -2,27 +2,34 @@ import { type FC } from 'react';
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
-  variant?: 'primary' | 'black' | 'ghost';
+  variant?: 'primary' | 'black' | 'ghost' | 'neutral';
+  small?: boolean;
 }
+
+const buttonStyles = {
+  primary: 'bg-primary text-white shadow-sm hover:bg-primary-200',
+  black: 'bg-black text-white',
+  ghost: 'text-text bg-transparent hover:bg-gray-200',
+  neutral: 'bg-gray-200 text-gray-600 hover:bg-gray-300',
+};
 
 const Button: FC<IProps> = ({
   children,
   variant = 'primary',
   loading = false,
+  small = false,
   ...props
 }) => {
   return (
     <button
-      className={`flex w-full items-center justify-center gap-2 rounded-md p-4 font-bold
-      ${loading ? 'pointer-events-none cursor-not-allowed opacity-50' : ''} ${
-        variant === 'black' ? 'bg-black' : ''
+      disabled={props.disabled || loading}
+      className={`flex items-center justify-center gap-2 rounded-md transition ${
+        buttonStyles[variant]
       } ${
-        variant === 'primary'
-          ? 'bg-primary text-white shadow-sm hover:bg-primary-200'
+        props.disabled || loading
+          ? 'pointer-events-none cursor-not-allowed opacity-50'
           : ''
-      } ${
-        variant === 'ghost' ? 'text-text bg-transparent hover:bg-gray-200' : ''
-      }`}
+      } font-bold ${small ? 'px-4 py-2' : 'p-4'}`}
       {...props}
     >
       {loading ? 'Pracujeme na tom...' : children}
