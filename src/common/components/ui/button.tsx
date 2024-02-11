@@ -18,6 +18,7 @@ const Button: FC<IProps> = ({
   variant = 'primary',
   loading = false,
   small = false,
+  className,
   ...props
 }) => {
   return (
@@ -29,7 +30,7 @@ const Button: FC<IProps> = ({
         props.disabled || loading
           ? 'pointer-events-none cursor-not-allowed opacity-50'
           : ''
-      } font-bold ${small ? 'px-4 py-2' : 'p-4'}`}
+      } font-bold ${small ? 'px-4 py-2' : 'p-4'} ${className}`}
       {...props}
     >
       {loading ? 'Pracujeme na tom...' : children}

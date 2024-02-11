@@ -38,13 +38,19 @@ const Sidebar: FC = () => {
           <nav className="pt-8">
             <ul className="flex flex-col gap-2 px-2">
               <li className="w-full cursor-pointer rounded-xl p-4 text-gray-600 transition-all  hover:bg-gray-200">
-                <Link href="/" className="flex w-full items-center gap-4">
+                <Link
+                  href="/dashboard"
+                  className="flex w-full items-center gap-4"
+                >
                   <FontAwesomeIcon icon={'home'} />
                   <p>Domov</p>
                 </Link>
               </li>
               <li className="w-full cursor-pointer rounded-xl p-4 text-gray-600 transition-all  hover:bg-gray-200">
-                <Link href="/" className="flex w-full items-center gap-4">
+                <Link
+                  href="/dashboard/logs"
+                  className="flex w-full items-center gap-4"
+                >
                   <FontAwesomeIcon icon={'clock'} />
                   <p>Historie</p>
                 </Link>
