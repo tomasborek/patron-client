@@ -5,12 +5,15 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import Input from '@/common/components/ui/input';
-import { Button } from '@/common/components/ui/button';
+import Button from '@/common/components/ui/button';
 import InputItem from '@/common/components/ui/inputItem';
 import { useActivate } from '@/common/hooks/api/useActivate';
-import ErrorPanel from '@/common/components/ui/errorPanel';
 const formSchema = z
   .object({
+    name: z
+      .string({ required_error: 'Zadejte prosím jméno' })
+      .min(1)
+      .max(255, { message: 'Jméno musí mít méně než 255 znaků' }),
     email: z.string().email({ message: 'Zadejte validní email' }),
     password: z
       .string()
@@ -50,11 +53,18 @@ const LoginPage: FC = () => {
       <form
         className="flex w-full flex-col items-center gap-4"
         onSubmit={handleSubmit(data => {
-          activate({ email: data.email, password: data.password });
+          activate({
+            email: data.email,
+            password: data.password,
+            name: data.name,
+          });
         })}
       >
+        <InputItem label="Jméno" error={errors.name?.message}>
+          <Input placeholder="Jan Nový" {...register('name')} />
+        </InputItem>
         <InputItem label="E-mail" error={errors.email?.message}>
-          <Input placeholder="Jan Nový" {...register('email')} />
+          <Input placeholder="vas@email.cz" {...register('email')} />
         </InputItem>
         <InputItem label="Heslo" error={errors.password?.message}>
           <Input

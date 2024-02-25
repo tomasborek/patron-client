@@ -9,11 +9,12 @@ export const useGetLogs = (data: ILogQuery) => {
   const query = useQuery({
     queryKey: ['logs', data],
     queryFn: () => logService.get(data),
-    enabled: !!data.userId || !!data.userId,
+    enabled: !!token,
   });
 
   return {
     logs: query.data?.data?.data?.logs,
+    count: query.data?.data?.data?.count,
     query,
   };
 };

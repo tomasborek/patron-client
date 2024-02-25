@@ -1,4 +1,4 @@
-import { ILogDTO, ILogQuery } from '@/common/interfaces/server/log';
+import { ILogQuery, ILogsDTO } from '@/common/interfaces/server/log';
 import { ApiService } from './api.service';
 
 export default class LogService extends ApiService {
@@ -7,7 +7,7 @@ export default class LogService extends ApiService {
   }
 
   get(data: ILogQuery) {
-    return this.sendRequest<{ logs: ILogDTO[] }>('GET', this.url(), {
+    return this.sendRequest<ILogsDTO>('GET', this.url(), {
       params: data,
       withCredentials: true,
     });

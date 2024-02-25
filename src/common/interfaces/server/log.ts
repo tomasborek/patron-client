@@ -3,6 +3,7 @@ import { LogAction, UserRole } from '../enums';
 export interface ILogQuery {
   userId?: string;
   institutionId?: string;
+  page?: number;
 }
 
 export interface ILogDTO {
@@ -27,4 +28,9 @@ export interface ILogDTO {
     name: string;
   } | null;
   action: LogAction;
+}
+
+export interface ILogsDTO {
+  logs: ILogDTO[];
+  count: number;
 }

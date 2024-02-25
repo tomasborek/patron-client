@@ -13,3 +13,15 @@ export type SelectedInstitution = {
 export type InstitutionsFilter = {
   name: string | undefined;
 };
+
+export interface ILogFilters {
+  institution: {
+    id: string;
+    name: string;
+  } | null;
+  user: {
+    id: string;
+    email: string;
+  } | null;
+  page: number;
+}

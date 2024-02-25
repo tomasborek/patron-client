@@ -34,6 +34,7 @@ const SelectInstitutionDialog: FC<Props> = ({ open, setOpen }) => {
               >
                 <FontAwesomeIcon icon="building" />
                 <h3>{i.name}</h3>
+                {i.role === 'ADMIN' ? <FontAwesomeIcon icon="crown" /> : null}
               </div>
             ))
           }

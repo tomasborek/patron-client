@@ -1,4 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  FontAwesomeIcon,
+  FontAwesomeIconProps,
+} from '@fortawesome/react-fontawesome';
 import Link from 'next/link';
 import { useState, type FC } from 'react';
 import {
@@ -7,13 +10,47 @@ import {
   PopoverTrigger,
 } from '@/common/components/ui/popover';
 import { useGetMe } from '../hooks/api/useGetMe';
-import Button from '@/common/components/ui/button';
 import { useInstitution } from '../contexts/InstitutionContext';
 import SelectInstitutionDialog from '@/modules/dashboard/components/SelectInstitutionDialog';
 import { useAuth } from '../contexts/AuthContext';
 import { useRouter } from 'next/navigation';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { usePathname } from 'next/navigation';
+
+interface ILink {
+  title: string;
+  href: string;
+  icon: IconProp;
+  restricted?: {
+    user?: boolean;
+    admin?: boolean;
+    dev?: boolean;
+  };
+}
+
+const LINKS: ILink[] = [
+  {
+    title: 'Domov',
+    href: '/dashboard',
+    icon: 'home',
+  },
+  {
+    title: 'Historie',
+    href: '/dashboard/logs',
+    icon: 'clock',
+  },
+  {
+    title: 'Instituce',
+    href: '/dashboard/institution',
+    icon: 'building',
+    restricted: {
+      user: true,
+    },
+  },
+];
 
 const Sidebar: FC = () => {
+  const pathname = usePathname();
   const { me } = useGetMe();
   const { logout } = useAuth();
   const router = useRouter();
@@ -37,30 +74,37 @@ const Sidebar: FC = () => {
           </header>
           <nav className="pt-8">
             <ul className="flex flex-col gap-2 px-2">
-              <li className="w-full cursor-pointer rounded-xl p-4 text-gray-600 transition-all  hover:bg-gray-200">
-                <Link
-                  href="/dashboard"
-                  className="flex w-full items-center gap-4"
-                >
-                  <FontAwesomeIcon icon={'home'} />
-                  <p>Domov</p>
+              {LINKS.filter(link => {
+                if (me?.role === 'DEVELOPER' && link.restricted?.dev) {
+                  return false;
+                }
+                if (institution?.role === 'ADMIN' && link.restricted?.admin) {
+                  return false;
+                }
+                if (
+                  me?.role === 'USER' &&
+                  institution?.role !== 'ADMIN' &&
+                  link.restricted?.user
+                ) {
+                  return false;
+                }
+                return true;
+              }).map(link => (
+                <Link href={link.href}>
+                  <li
+                    className={`flex w-full  cursor-pointer items-center gap-4 rounded-xl p-4 text-gray-600 transition-all  hover:bg-gray-200 ${
+                      pathname === link.href ? 'bg-gray-200' : ''
+                    }`}
+                  >
+                    <FontAwesomeIcon icon={link.icon as IconProp} />
+                    <p>{link.title}</p>
+                  </li>
                 </Link>
-              </li>
-              <li className="w-full cursor-pointer rounded-xl p-4 text-gray-600 transition-all  hover:bg-gray-200">
-                <Link
-                  href="/dashboard/logs"
-                  className="flex w-full items-center gap-4"
-                >
-                  <FontAwesomeIcon icon={'clock'} />
-                  <p>Historie</p>
-                </Link>
-              </li>
-              {me!.role === 'DEVELOPER' ? (
-                <li className="w-full cursor-pointer rounded-xl p-4 text-gray-600 transition-all  hover:bg-gray-200">
-                  <Link href="/" className="flex w-full items-center gap-4">
-                    <FontAwesomeIcon icon={'building'} />
-                    <p>Instituce</p>
-                  </Link>
+              ))}
+              {me?.role === 'DEVELOPER' ? (
+                <li className="flex items-center gap-4 rounded-md bg-black p-2 text-white">
+                  <FontAwesomeIcon icon="crown" />
+                  <p>Vítejte v developerském účtu</p>
                 </li>
               ) : null}
             </ul>
@@ -74,6 +118,9 @@ const Sidebar: FC = () => {
             >
               <FontAwesomeIcon icon={'building'} />
               {institution?.name ?? 'Vybrat institutci'}
+              {institution?.role === 'ADMIN' ? (
+                <FontAwesomeIcon icon="crown" />
+              ) : null}
             </button>
           </div>
           <div className="flex items-center justify-between gap-4 border-t-[1px] border-gray-200 p-4">

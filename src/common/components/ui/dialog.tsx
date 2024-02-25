@@ -23,7 +23,7 @@ const Dialog: FC<Props> = ({ open, setOpen, title, children }) => {
   }, []);
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 top-0 flex items-center justify-center bg-black bg-opacity-50 transition-all duration-300 ${
+      className={`fixed bottom-0 left-0 right-0 top-0 z-[1000] flex items-center justify-center bg-black bg-opacity-50 transition-all duration-300 ${
         open
           ? 'pointer-events-auto opacity-100'
           : 'pointer-events-none opacity-0'

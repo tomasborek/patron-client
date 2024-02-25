@@ -1,4 +1,5 @@
 import type { UserInstitutionRole, UserRole } from '../enums';
+import { IDevSimpleInstitution } from './institution';
 
 export interface IMe {
   id: string;
@@ -6,6 +7,18 @@ export interface IMe {
   email: string;
   role: UserRole;
   institutions: IMeInsitution[];
+  devInstitutions?: IDevSimpleInstitution[];
+}
+
+export interface IInstitutionUserDTO {
+  id: string;
+  name: string | null;
+  institutionRole: UserInstitutionRole;
+  role: UserRole;
+  email: string;
+  createdAt: Date;
+  active: boolean;
+  verified: boolean;
 }
 
 export interface IMeInsitution {
@@ -43,6 +56,7 @@ export interface ILoginResponseDTO {
 
 export interface IActivateDTO {
   email: string;
+  name: string;
   password: string;
 }
 
@@ -50,6 +64,6 @@ export interface IActivateResponseDTO {
   tokenId: string;
 }
 
-export interface IVerifyDTO{
+export interface IVerifyDTO {
   code: number;
 }
