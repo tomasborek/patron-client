@@ -9,6 +9,7 @@ import { useSearchParams } from 'next/navigation';
 const VerifyPage: FC = () => {
   const { verify, mutation } = useVerify();
   const params = useSearchParams();
+  if (!params.get('id')) return null;
   return (
     <form
       onSubmit={e => {
