@@ -2,11 +2,19 @@
 import Button from '@/common/components/ui/button';
 import Input from '@/common/components/ui/input';
 import InputItem from '@/common/components/ui/inputItem';
-import { type FC } from 'react';
+import { Suspense, type FC } from 'react';
 import { useVerify } from '@/common/hooks/api/useVerify';
 import { useSearchParams } from 'next/navigation';
 
 const VerifyPage: FC = () => {
+  return (
+    <Suspense fallback={<p>Loading</p>}>
+      <VerifyPageContent />
+    </Suspense>
+  );
+};
+
+const VerifyPageContent: FC = () => {
   const { verify, mutation } = useVerify();
   const params = useSearchParams();
   if (!params.get('id')) return null;
