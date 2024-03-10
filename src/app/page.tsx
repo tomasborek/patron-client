@@ -1,9 +1,8 @@
+'use client';
+import ProtectedRoute from '@/common/components/protectedRoute';
+
 const HomePage = () => {
-  return (
-    <main>
-      <div>yooo</div>
-    </main>
-  );
+  return <ProtectedRoute redirect />;
 };
 
 export default HomePage;

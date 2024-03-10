@@ -4,10 +4,11 @@ import { useAuth } from '../contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 
 interface IProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
+  redirect?: boolean;
 }
 
-const ProtectedRoute: FC<IProps> = ({ children }) => {
+const ProtectedRoute: FC<IProps> = ({ children, redirect }) => {
   const { me } = useGetMe();
   const { currentUser } = useAuth();
   const router = useRouter();
@@ -18,6 +19,7 @@ const ProtectedRoute: FC<IProps> = ({ children }) => {
   }
   if (currentUser === undefined) return <LoadingPage />;
   if (!me) return <LoadingPage />;
+  if (redirect && currentUser) router.push('/dashboard');
   return children;
 };
 

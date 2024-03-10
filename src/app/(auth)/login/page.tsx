@@ -27,28 +27,31 @@ const LoginPage: FC = () => {
     resolver: zodResolver(formSchema),
   });
   return (
-    <div className="flex w-full flex-col gap-4">
-      <h2 className="font-bold">Přihlášení</h2>
-      <form
-        className="flex w-full flex-col items-center gap-4"
-        onSubmit={handleSubmit(data => {
-          login(data);
-        })}
-      >
-        <InputItem label="E-mail" error={errors.email?.message}>
-          <Input placeholder="E-mail" {...register('email')} />
-        </InputItem>
-        <InputItem label="Heslo" error={errors.password?.message}>
-          <Input
-            placeholder="Heslo"
-            type="password"
-            {...register('password')}
-          />
-        </InputItem>
+    <>
+      <title>Přihlášení | PatronBox</title>
+      <div className="flex w-full flex-col gap-4">
+        <h2 className="font-bold">Přihlášení</h2>
+        <form
+          className="flex w-full flex-col items-center gap-4"
+          onSubmit={handleSubmit(data => {
+            login(data);
+          })}
+        >
+          <InputItem label="E-mail" error={errors.email?.message}>
+            <Input placeholder="E-mail" {...register('email')} />
+          </InputItem>
+          <InputItem label="Heslo" error={errors.password?.message}>
+            <Input
+              placeholder="Heslo"
+              type="password"
+              {...register('password')}
+            />
+          </InputItem>
 
-        <Button loading={mutation.isPending}>Přihlásit se</Button>
-      </form>
-    </div>
+          <Button loading={mutation.isPending}>Přihlásit se</Button>
+        </form>
+      </div>
+    </>
   );
 };
 

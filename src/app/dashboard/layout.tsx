@@ -9,12 +9,15 @@ interface Props {
 
 const AppLayout: FC<Props> = ({ children }) => {
   return (
-    <ProtectedRoute>
-      <main className="flex min-h-screen">
-        <Sidebar />
-        <div className="w-full p-12">{children}</div>
-      </main>
-    </ProtectedRoute>
+    <>
+      <title>Dashboard | PatronBox</title>
+      <ProtectedRoute>
+        <main className="flex min-h-screen">
+          <Sidebar />
+          <div className="w-full p-12">{children}</div>
+        </main>
+      </ProtectedRoute>
+    </>
   );
 };
 
