@@ -15,7 +15,7 @@ const schema = z
   .strict();
 
 const EntryInterfacePage: FC = () => {
-  const { handleSubmit, register } = useForm({
+  const { handleSubmit, register } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
   });
   const { connect } = useInterface();

@@ -57,6 +57,7 @@ const ReservationPage: FC = () => {
                 render={(items: IStationDTO[]) =>
                   items.map(s => (
                     <DropdownMenuItem
+                      key={s.id}
                       onClick={() => setSelectedStation(s)}
                       className="cursor-pointer p-4"
                     >

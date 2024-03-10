@@ -10,9 +10,9 @@ export const useCancelReservation = () => {
 
   const mutation = useMutation({
     mutationFn: (id: string) => service.cancel(id),
-    onSuccess: () => {
+    onSuccess: async () => {
       toast.success('Rezervace zrušena');
-      queryClient.invalidateQueries({ queryKey: ['reservations'] });
+      await queryClient.invalidateQueries({ queryKey: ['reservations'] });
     },
     onError: () => {
       toast.error('Něco se pokazilo');

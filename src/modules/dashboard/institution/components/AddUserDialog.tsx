@@ -1,15 +1,8 @@
 import Button from '@/common/components/ui/button';
 import Dialog from '@/common/components/ui/dialog';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/common/components/ui/dropdown-menu';
 import Input from '@/common/components/ui/input';
 import InputItem from '@/common/components/ui/inputItem';
 import { useAddUser } from '@/common/hooks/api/useAddUser';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useEffect, type FC } from 'react';
 import { useForm } from 'react-hook-form';
@@ -32,7 +25,7 @@ const AddUserDialog: FC<IProps> = ({
   institutionId,
   institutionName,
 }) => {
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
   });
   const { addUser, mutation } = useAddUser();

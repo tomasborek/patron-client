@@ -11,6 +11,7 @@ const Code: FC<IProps> = ({ code, setCode }) => {
       <div className="mt-8 grid grid-cols-3 gap-4">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0, '<'].map(item => (
           <div
+            key={item}
             onClick={() => {
               if (item === '<') {
                 setCode(code.slice(0, -1));

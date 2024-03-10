@@ -29,7 +29,7 @@ const LogItem: FC<IProps> = ({ log }) => {
             <p className="font-bold">{logAction[log.action]}</p>
             <p className="text-sm text-gray-400">
               {log.institution ? `Instituce ${log.institution.name}` : null}
-              {log.institution && (log.station || log.box) ? ' - ' : null}
+              {log.institution && (log.station ?? log.box) ? ' - ' : null}
               {log.station ? `Stanice ${log.station.name}` : null}
               {log.station && log.box ? ' - ' : null}
               {log.box ? `Box ${log.box.localId}` : null}

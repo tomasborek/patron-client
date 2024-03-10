@@ -5,6 +5,7 @@ const config = {
     project: true,
   },
   plugins: ['@typescript-eslint'],
+  ignorePatterns: ['src/app/layout.tsx'],
   extends: [
     'next/core-web-vitals',
     'plugin:@typescript-eslint/recommended-type-checked',
@@ -15,6 +16,9 @@ const config = {
     '@typescript-eslint/consistent-type-definitions': 'off',
     '@next/next/no-img-element': 'off',
     '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/non-nullable-type-assertion-style': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
+    'react/display-name': 'off',
 
     '@typescript-eslint/consistent-type-imports': [
       'warn',
@@ -31,6 +35,6 @@ const config = {
       },
     ],
   },
-}
+};
 
-module.exports = config
+module.exports = config;

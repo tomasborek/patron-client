@@ -13,7 +13,8 @@ export const useLogin = () => {
   const mutation = useMutation({
     mutationFn: (data: ILoginDTO) => userService.auth(data),
     onSuccess: data => {
-      login(data.data.data?.token as string);
+      if (!data.data.data) throw new Error('Token is not present');
+      login(data.data.data.token);
       toast.success('Přihlášení proběhlo úspěšně');
       router.push('/dashboard');
     },

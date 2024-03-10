@@ -29,6 +29,7 @@ export const BoxSelect: FC<IProps> = ({
       render={(items: IBoxDTO[]) =>
         items.map(b => (
           <div
+            key={b.id}
             onClick={() => (b.state === 'DEFAULT' ? setSelectedBox(b) : null)}
             className={`flex items-center justify-between rounded-md p-4 font-bold transition ${
               boxStateStyles[b.reserved ? 'RESERVED' : b.state]

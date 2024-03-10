@@ -8,9 +8,10 @@ interface Props {
 
 const AuthLayout: FC<Props> = ({ children }) => {
   const { currentUser } = useAuth();
+  const router = useRouter();
 
   if (currentUser) {
-    useRouter().push('/dashboard');
+    router.push('/dashboard');
     return null;
   }
   return (

@@ -23,11 +23,11 @@ const Button: FC<IProps> = ({
 }) => {
   return (
     <button
-      disabled={props.disabled || loading}
+      disabled={props.disabled ?? loading}
       className={`flex items-center justify-center gap-2 rounded-md transition ${
         buttonStyles[variant]
       } ${
-        props.disabled || loading
+        props.disabled ?? loading
           ? 'pointer-events-none cursor-not-allowed opacity-50'
           : ''
       } font-bold ${small ? 'px-4 py-2' : 'p-4'} ${className}`}

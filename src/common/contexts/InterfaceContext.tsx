@@ -26,7 +26,6 @@ export const useInterface = () => {
 
 export const InterfaceProvider: FC<{ children: React.ReactNode }> = ({
   children,
-  ...props
 }) => {
   const [stationId, setStationId] = useState<string | null>(null);
   const [socket, setSocket] = useState<Socket | null>(null);
@@ -34,7 +33,7 @@ export const InterfaceProvider: FC<{ children: React.ReactNode }> = ({
   const connected = !!socket?.active;
   const router = useRouter();
   const connect = (id: string, password: string) => {
-    const socket = io('http://localhost:3030', {
+    const socket = io(process.env.NEXT_PUBLIC_API_ROOT_URL as string, {
       auth: { password },
       query: { id },
     });
@@ -43,8 +42,7 @@ export const InterfaceProvider: FC<{ children: React.ReactNode }> = ({
       router.push('/user-interface/communication');
     });
     setSocket(socket);
-    socket.on('status', (data: any) => {
-      console.log(data);
+    socket.on('status', (data: { data: { boxes: IBoxDTO[] } }) => {
       setBoxes(data.data.boxes);
     });
   };
