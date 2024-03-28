@@ -18,7 +18,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { BoxSelect } from '@/common/components/widgets/BoxSelect';
 import { useState, type FC } from 'react';
 import Button from '@/common/components/ui/button';
-import moment from 'moment';
 import { useCreateReservation } from '@/common/hooks/api/useCreateReservation';
 
 const ReservationPage: FC = () => {
@@ -102,6 +101,7 @@ const ReservationPage: FC = () => {
             Rezervace bude platná od jejího vytvoření 24 hodin
           </div>
           <Button
+            className="mb-32"
             loading={mutation.isPending}
             disabled={!selectedBox || !selectedStation}
           >

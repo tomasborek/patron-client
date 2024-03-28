@@ -1,7 +1,6 @@
 import { useContext, createContext, type FC, useState } from 'react';
 import { Socket, io } from 'socket.io-client';
 import { useRouter } from 'next/navigation';
-import toaster from 'react-hot-toast';
 import { IBoxDTO } from '../interfaces/server/box';
 
 interface IInterfaceContext {

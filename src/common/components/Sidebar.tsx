@@ -63,7 +63,7 @@ const Sidebar: FC = () => {
         open={institutionDialogOpen}
         setOpen={setInstitutionDialogOpen}
       />
-      <div className="flex min-h-screen min-w-[300px] flex-col justify-between border-r-[1px] border-gray-200 bg-gray-100 pt-8 shadow-sm">
+      <div className=" hidden min-h-screen min-w-[300px] flex-col justify-between border-r-[1px] border-gray-200 bg-gray-100 pt-8 shadow-sm md:flex">
         <div>
           <header className="border-b-[1px] border-gray-200 pb-8 pl-8">
             <img

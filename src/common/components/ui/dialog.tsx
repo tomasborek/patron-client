@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import type { FC } from 'react';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import Drawer from './drawer';
 
 interface Props {
   title: string;
@@ -10,6 +11,7 @@ interface Props {
 }
 const Dialog: FC<Props> = ({ open, setOpen, title, children }) => {
   const dialogRef = useRef<HTMLDivElement | null>(null);
+  const [drawerMode, setDrawerMode] = useState<boolean>(false);
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (dialogRef.current && !dialogRef.current.contains(e.target as Node)) {
@@ -21,6 +23,19 @@ const Dialog: FC<Props> = ({ open, setOpen, title, children }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setDrawerMode(true);
+    }
+  }, []);
+  if (drawerMode) {
+    return (
+      <Drawer open={open} setOpen={setOpen} title={title}>
+        {children}
+      </Drawer>
+    );
+  }
   return (
     <div
       className={`fixed bottom-0 left-0 right-0 top-0 z-[1000] flex items-center justify-center bg-black bg-opacity-50 transition-all duration-300 ${
