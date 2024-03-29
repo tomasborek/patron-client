@@ -7,9 +7,9 @@ interface Props {
   noContentMessage?: string;
   className?: React.HTMLAttributes<HTMLDivElement>['className'];
 }
-import { Loader2 } from 'lucide-react';
+import Loading from './ui/loading';
 const List: FC<Props> = ({ items, render, noContentMessage, className }) => {
-  if (items === undefined) return <Loader2 />;
+  if (items === undefined) return <Loading centered />;
   if (items.length === 0)
     return (
       <div>

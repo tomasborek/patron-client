@@ -1,5 +1,4 @@
 'use client';
-import { Loader2 } from 'lucide-react';
 import { FC } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -85,16 +84,13 @@ const LoginPage: FC = () => {
               {...register('password-again')}
             />
           </InputItem>
-          {mutation.isPending ? (
-            <Button variant={'primary'} disabled>
-              <Loader2 />
-              Pracujeme na tom
-            </Button>
-          ) : (
-            <Button variant={'primary'} type="submit">
-              Přihlásit se
-            </Button>
-          )}
+          <Button
+            loading={mutation.isPending}
+            variant={'primary'}
+            type="submit"
+          >
+            Přihlásit se
+          </Button>
         </form>
       </div>
     </>

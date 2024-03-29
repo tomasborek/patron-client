@@ -1,4 +1,5 @@
 import { type FC } from 'react';
+import Loading from './loading';
 
 interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   loading?: boolean;
@@ -33,7 +34,14 @@ const Button: FC<IProps> = ({
       } font-bold ${small ? 'px-4 py-2' : 'p-4'} ${className}`}
       {...props}
     >
-      {loading ? 'Pracujeme na tom...' : children}
+      {loading ? (
+        <div className="flex items-center gap-4">
+          <Loading color="#fff" size={28} />
+          <p>Pracujeme na tom...</p>
+        </div>
+      ) : (
+        children
+      )}
     </button>
   );
 };
