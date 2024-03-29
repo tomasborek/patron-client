@@ -13,7 +13,7 @@ const List: FC<Props> = ({ items, render, noContentMessage, className }) => {
   if (items.length === 0)
     return (
       <div>
-        <p className="font-sm text-gray-600">
+        <p className="font-sm w-full text-center text-gray-400">
           {noContentMessage ?? 'Nic jsme nenašli.'}
         </p>
       </div>
