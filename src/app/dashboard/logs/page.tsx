@@ -58,7 +58,9 @@ const LogsPage = () => {
           logs.map(log => <LogItem key={log.id} log={log} />)
         }
       />
-      <Pagination total={count} page={filters.page} setPage={setPage} />
+      {logs?.length ? (
+        <Pagination total={count} page={filters.page} setPage={setPage} />
+      ) : null}
     </DashboardWrapper>
   );
 };

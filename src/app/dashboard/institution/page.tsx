@@ -36,7 +36,9 @@ const InstitutionPage: FC = () => {
             items.map(u => <UserItem key={u.id} user={u} />)
           }
         />
-        <Pagination total={count} page={page} setPage={setPage} />
+        {users?.length ? (
+          <Pagination total={count} page={page} setPage={setPage} />
+        ) : null}
       </DashboardWrapper>
     </>
   );
