@@ -103,7 +103,11 @@ const BottomPanel: FC = () => {
                 }
                 return true;
               }).map(link => (
-                <Link key={link.href} href={link.href}>
+                <Link
+                  onClick={() => setSidebarOpen(false)}
+                  key={link.href}
+                  href={link.href}
+                >
                   <li
                     className={`flex w-full  cursor-pointer items-center gap-4 rounded-xl p-4 text-gray-600 transition-all  hover:bg-gray-200 ${
                       pathname === link.href ? 'bg-gray-200' : ''
