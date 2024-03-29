@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { ApiService } from './api.service';
-import type { InstitutionsFilter } from '@/common/interfaces/client';
 import {
   IAddUserDTO,
   IStationDTO,
@@ -49,5 +48,14 @@ export class InstitutionService extends ApiService {
       data,
       withCredentials: true,
     });
+  }
+  removeUser(institutionId: string, userId: string) {
+    return this.sendRequest(
+      'DELETE',
+      this.url(`/${institutionId}/user/${userId}`),
+      {
+        withCredentials: true,
+      },
+    );
   }
 }
