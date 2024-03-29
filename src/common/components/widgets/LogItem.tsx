@@ -20,12 +20,12 @@ const logAction = {
 
 const LogItem: FC<IProps> = ({ log }) => {
   return (
-    <div className="flex w-full items-center justify-between rounded-md bg-gray-100 p-4 text-gray-600">
-      <div className="flex items-center gap-4">
+    <div className="flex w-full flex-col items-center justify-between rounded-md bg-gray-100 p-4 text-gray-600 md:flex-row">
+      <div className="flex flex-col items-center gap-4 md:flex-row">
         <FontAwesomeIcon icon="clock" />
         <div>
           <p>{log.user?.email ?? 'Neznámý uživatel'}</p>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col items-center gap-2 md:flex-row">
             <p className="font-bold">{logAction[log.action]}</p>
             <p className="text-sm text-gray-400">
               {log.institution ? `Instituce ${log.institution.name}` : null}
