@@ -21,7 +21,7 @@ const BoxesPage: FC = () => {
           onClick={() => processBorrow(code, selectedBox!.id)}
           className="mt-8"
         >
-          <Button className="w-full p-8 text-2xl">Vrátit</Button>
+          <Button className="w-full p-8 text-2xl">Půjčit</Button>
         </div>
       </div>
     );

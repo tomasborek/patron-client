@@ -18,7 +18,7 @@ const EntryInterfacePage: FC = () => {
   const { handleSubmit, register } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
   });
-  const { connect } = useInterface();
+  const { connect, connecting } = useInterface();
   return (
     <form
       className="rounde-md container flex flex-col gap-4 bg-white p-4 shadow-md"
@@ -32,7 +32,7 @@ const EntryInterfacePage: FC = () => {
       <InputItem label="Heslo">
         <Input type="password" {...register('password')} />
       </InputItem>
-      <Button>Vstoupit</Button>
+      <Button loading={connecting}>Vstoupit</Button>
     </form>
   );
 };

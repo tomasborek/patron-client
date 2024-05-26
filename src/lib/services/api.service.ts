@@ -1,7 +1,8 @@
 import { IResponse } from '@/common/interfaces/server';
-import axios, { AxiosHeaders, AxiosRequestConfig } from 'axios';
+import axios, { AxiosHeaders } from 'axios';
 
 const API_URL = process.env.NEXT_PUBLIC_API_ROOT_URL;
+const API_PREFIX = process.env.NEXT_PUBLIC_API_PREFIX;
 
 export class ApiService {
   token: string | undefined;
@@ -11,7 +12,7 @@ export class ApiService {
     this.prefix = prefix;
   }
   public url(path?: string) {
-    return `${API_URL}${this.prefix ?? ''}${path ?? ''}`;
+    return `${API_URL}${API_PREFIX}${this.prefix ?? ''}${path ?? ''}`;
   }
 
   public getBearer(token: string | undefined) {

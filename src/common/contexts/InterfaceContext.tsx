@@ -10,6 +10,7 @@ interface IInterfaceContext {
   setStationId: React.Dispatch<React.SetStateAction<string | null>>;
   connect: (id: string, password: string) => void;
   connected: boolean;
+  connecting: boolean;
   boxes: IBoxDTO[];
 }
 
@@ -29,14 +30,18 @@ export const InterfaceProvider: FC<{ children: React.ReactNode }> = ({
   const [stationId, setStationId] = useState<string | null>(null);
   const [socket, setSocket] = useState<Socket | null>(null);
   const [boxes, setBoxes] = useState<IBoxDTO[]>([]);
+  const [connecting, setConnecting] = useState<boolean>(false);
   const connected = !!socket?.active;
   const router = useRouter();
   const connect = (id: string, password: string) => {
+    if (connecting) return;
+    setConnecting(true);
     const socket = io(process.env.NEXT_PUBLIC_API_ROOT_URL as string, {
       auth: { password },
       query: { id },
     });
     socket.on('connect', () => {
+      setConnecting(false);
       setStationId(id);
       router.push('/user-interface/communication');
     });
@@ -94,6 +99,7 @@ export const InterfaceProvider: FC<{ children: React.ReactNode }> = ({
         setStationId,
         connect,
         connected,
+        connecting,
         boxes,
       }}
     >
